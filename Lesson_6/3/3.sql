@@ -1,4 +1,4 @@
-select gender, count(*) as total
-from profiles where profiles.user_id in (
-select user_id from likes)
-group by gender;
+select 
+gender, 
+sum((select count(user_id) from likes where likes.user_id = profiles.user_id)) as total
+from profiles group by gender;
