@@ -1,6 +1,6 @@
 select distinct
 c.name,
-count(cu.user_id) over(partition by c.id) as total,
+count(cu.user_id) over(partition by c.id) as in_group,
 first_value(p.birthday) over(partition by c.id order by birthday desc) as youngest,
 last_value(p.birthday) over(partition by c.id order by birthday desc RANGE BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) as oldest,
 count(u.id) over () as total,
